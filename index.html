@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shang Gao</title>
+<meta name="description" content="Shang Gao — M.S. student in Computation & Mechanics at Stanford. Physics-based modeling and machine learning for engineered and infrastructure systems.">
+<link rel="icon" href="photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --soft: #f7f7f5;
+    --text: #222222;
+    --muted: #666b73;
+    --faint: #8e939a;
+    --line: #e6e6e3;
+    --line2: #9fb3c8;
+    --accent: #8c1515;          /* Stanford cardinal: headings, buttons */
+    --accent-soft: #f7ecec;
+    --link: #1a6dc2;
+    --hover: #e07b24;
+    --hl: #fffaea;
+    --phys: #e07b24; --phys-bg: #fdf1e6; --ml-bg: #e9f2fc;
+    --gold-bg: #fdf3d8; --gold: #8a5a00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151618; --soft: #1c1e21; --text: #e6e6e6; --muted: #a3a8b0; --faint: #7e848c; --line: #2b2e33;
+      --line2: #50606f; --accent: #e57373; --accent-soft: #2d1f21; --link: #6aa9ec; --hover: #f2a95c; --hl: #221f14;
+      --phys: #f0a050; --phys-bg: #2c2218; --ml-bg: #17222f; --gold-bg: #3a2f12; --gold: #f0c766;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151618; --soft: #1c1e21; --text: #e6e6e6; --muted: #a3a8b0; --faint: #7e848c; --line: #2b2e33;
+    --line2: #50606f; --accent: #e57373; --accent-soft: #2d1f21; --link: #6aa9ec; --hover: #f2a95c; --hl: #221f14;
+    --phys: #f0a050; --phys-bg: #2c2218; --ml-bg: #17222f; --gold-bg: #3a2f12; --gold: #f0c766;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15.5px/1.62 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--hover); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 22px; height: 54px; font-size: 14.5px; }
+  nav .brand { font: 600 18px "Source Serif 4", Georgia, serif; color: var(--text); margin-right: auto; }
+  nav a.l { color: var(--muted); }
+  nav a.l:hover, nav a.l.active { color: var(--accent); }
+  #theme { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr 220px; gap: 48px; padding: 56px 0 36px; align-items: start; }
+  .hero h1 { font: 600 44px/1.1 "Source Serif 4", Georgia, serif; margin: 0 0 6px; }
+  .hero .role { color: var(--muted); font-size: 16.5px; margin: 0 0 18px; }
+  .hero p { margin: 0 0 13px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; margin: 6px 0 18px; padding: 4px 13px;
+    border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 700;
+  }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 600 14px Lato, sans-serif; cursor: pointer;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.1); color: #fff; }
+  .btn svg { width: 15px; height: 15px; }
+  .avatar { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; border: 4px solid var(--soft); box-shadow: 0 0 0 1px var(--line); }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.25); transform-origin: 50% 20%; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .stat { padding: 14px 16px; text-align: center; }
+  .stat + .stat { border-left: 1px solid var(--line); }
+  .stat b { display: block; font: 600 26px/1.2 "Source Serif 4", Georgia, serif; color: var(--accent); }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  /* Sections */
+  section { padding-top: 46px; scroll-margin-top: 54px; }
+  h2 { font: 600 27px/1.2 "Source Serif 4", Georgia, serif; margin: 0 0 16px; display: flex; align-items: baseline; gap: 12px; }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); transform: translateY(-6px); }
+
+  /* Highlights */
+  ul.highlights { list-style: none; margin: 0; padding: 0; }
+  ul.highlights li { position: relative; padding: 0 0 10px 22px; }
+  ul.highlights li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+
+  /* Diagram */
+  figure.diagram { margin: 0 0 6px; }
+  figure.diagram svg { width: 100%; height: auto; display: block; font-family: Lato, Helvetica, Arial, sans-serif; }
+  figure.diagram figcaption { text-align: center; color: var(--muted); font-size: 14px; font-style: italic; }
+  .spoke { fill: none; stroke: var(--line2); stroke-width: 1.8; stroke-dasharray: 5 5; animation: flow 1.4s linear infinite; }
+  .arc { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+  .ahead { fill: var(--muted); }
+  @keyframes flow { to { stroke-dashoffset: -20; } }
+  .dot.p { fill: var(--phys); } .dot.l { fill: var(--link); }
+  .node { stroke-width: 2; }
+  .node.phys { fill: var(--phys-bg); stroke: var(--phys); }
+  .node.ml { fill: var(--ml-bg); stroke: var(--link); }
+  .nodetxt { text-anchor: middle; font-size: 14.5px; font-weight: 700; fill: var(--text); }
+  .arclbl { text-anchor: middle; font-size: 12.5px; font-style: italic; fill: var(--muted); }
+  .box rect { fill: var(--bg); stroke: #cfcfcf; stroke-width: 1.3; transition: stroke .2s; }
+  .box:hover rect { stroke: var(--accent); }
+  .bt { text-anchor: middle; font-size: 15px; font-weight: 700; fill: var(--text); }
+  .bs { text-anchor: middle; font-size: 12px; fill: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .spoke { animation: none; } .dot { display: none; } }
+
+  /* Interests */
+  .interests { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; margin-top: 18px; }
+  .interests div { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; }
+  .interests b { display: block; }
+  .interests span { color: var(--muted); font-size: 14.5px; }
+
+  /* Tabs (shared by projects + publications) */
+  .tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); margin-bottom: 18px; }
+  .tabs button { border: 0; background: transparent; color: var(--muted); border-radius: 7px; padding: 5px 12px; font: 600 13px Lato, sans-serif; cursor: pointer; }
+  .tabs button:hover { color: var(--text); }
+  .tabs button.on { background: var(--bg); color: var(--accent); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .proj { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; transition: border-color .15s; }
+  .proj:hover { border-color: var(--faint); }
+  .proj .meta { font-size: 13px; color: var(--faint); }
+  .proj h3 { font-size: 16px; line-height: 1.38; margin: 3px 0 6px; }
+  .proj p { margin: 0 0 10px; font-size: 14.5px; color: var(--muted); }
+  .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .chip { font-size: 12px; padding: 1px 8px; border-radius: 5px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+  .lk { font-size: 12.5px; font-weight: 700; padding: 1px 9px; border-radius: 5px; border: 1px solid var(--link); color: var(--link); }
+  .lk:hover { background: var(--link); color: #fff; }
+
+  /* Publications */
+  .pub { display: grid; grid-template-columns: 170px 1fr; gap: 20px; padding: 14px; border-radius: 10px; margin: 0 -14px; }
+  .pub.hl { background: var(--hl); }
+  .thumb { width: 170px; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; }
+  .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .thumb .ph { font: 600 15px "Source Serif 4", Georgia, serif; color: var(--muted); text-align: center; padding: 8px; }
+  .pub .title { font-weight: 700; font-size: 15.5px; line-height: 1.42; }
+  .pub .authors { font-size: 14.5px; color: var(--muted); margin: 2px 0; }
+  .pub .authors b { color: var(--text); }
+  .pub .venue { font-size: 14.5px; font-style: italic; }
+  .pub .foot { margin-top: 7px; }
+  .badge { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); }
+  .st { font-size: 12px; padding: 1px 8px; border-radius: 5px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+  .award { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 5px; background: var(--gold-bg); color: var(--gold); }
+
+  /* Education */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 10px; width: 2px; background: var(--line); }
+  .tl { position: relative; margin-bottom: 20px; }
+  .tl::before { content: ""; position: absolute; left: -26px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+  .tl .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .tl h3 { margin: 0; font-size: 16.5px; }
+  .tl .when { color: var(--faint); font-size: 14px; }
+  .tl p { margin: 1px 0 0; color: var(--muted); font-size: 14.5px; }
+
+  /* Contact */
+  .contact { border: 1px solid var(--line); background: var(--soft); border-radius: 14px; padding: 26px 28px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .contact h3 { margin: 0 0 4px; font: 600 22px "Source Serif 4", Georgia, serif; }
+  .contact p { margin: 0; color: var(--muted); }
+
+  .thumb img { cursor: zoom-in; }
+  #lb { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.72); display: none; place-items: center; padding: 24px; cursor: zoom-out; }
+  #lb.open { display: grid; }
+  #lb img { max-width: min(960px, 100%); max-height: 88vh; background: #fff; border-radius: 8px; padding: 10px; }
+  footer { text-align: center; color: var(--faint); font-size: 13px; padding: 36px 0 44px; }
+  #top { position: fixed; right: 18px; bottom: 18px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .2s; font-size: 16px; }
+  #top.show { opacity: 1; pointer-events: auto; }
+
+  @media (max-width: 760px) {
+    nav a.l.sm-hide { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 32px; }
+    .avatar { order: -1; width: 150px; height: 150px; }
+    .hero h1 { font-size: 36px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(3) { border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .interests, .projects { grid-template-columns: 1fr; }
+    .pub { grid-template-columns: 1fr; gap: 10px; }
+    .thumb { width: 100%; max-width: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#">Shang Gao</a>
+  <a class="l sm-hide" href="#interests">Interests</a>
+  <a class="l" href="#research">Research</a>
+  <a class="l" href="#publications">Publications</a>
+  <a class="l sm-hide" href="#education">Education</a>
+  <a class="l" href="cv.pdf" target="_blank">CV</a>
+  <button id="theme" aria-label="Toggle dark mode">◐</button>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ==================== 首页 ==================== -->
+<header class="hero">
+  <div>
+    <h1>Shang Gao</h1>
+    <p class="role">M.S. student, Computation &amp; Mechanics · Stanford University</p>
+    <p>
+      I am an M.S. student in the Department of Civil &amp; Environmental Engineering at
+      <a href="https://www.stanford.edu/" target="_blank">Stanford University</a>. I received my B.S. in Civil Engineering
+      (minor in Finance) from <a href="https://en.tongji.edu.cn/" target="_blank">Tongji University</a> and spent a year as a
+      visiting student at <a href="https://www.berkeley.edu/" target="_blank">UC Berkeley</a>.
+    </p>
+    <p>
+      I work on <b>physics-based modeling and machine learning for engineered and infrastructure systems</b>.
+      Coming from civil engineering, I am drawn to problems where a physical model is known but expensive,
+      incomplete or hard to act on, and where learning can close the gap: surrogates that make finite-element
+      simulation fast enough for inversion, spectral physics paired with transformers, navigation policies that
+      transfer from simulation to real robots, and LLM agents and offline reinforcement learning for decision-making.
+    </p>
+    <div class="pill">Applying to Ph.D. programs for Fall 2027</div>
+    <div class="btns">
+      <a class="btn primary" href="mailto:shang698@stanford.edu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>shang698@stanford.edu</a>
+      <button class="btn copy" title="Copy email address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy email</span></button>
+      <a class="btn" href="cv.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>CV</a>
+      <!-- 有 Google Scholar / LinkedIn 时取消注释并填链接 -->
+      <!-- <a class="btn" href="https://scholar.google.com/citations?user=XXXX" target="_blank">Google Scholar</a> -->
+      <!-- <a class="btn" href="https://www.linkedin.com/in/XXXX" target="_blank">LinkedIn</a> -->
+    </div>
+  </div>
+  <div class="avatar"><img src="photo.jpg" alt="Shang Gao"></div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>13</b><span>papers</span></div>
+  <div class="stat"><b>6</b><span>first-authored</span></div>
+  <div class="stat"><b>1</b><span>granted patent</span></div>
+  <div class="stat"><b>Best Paper</b><span>Award (2nd), SocialSys ’26</span></div>
+</div>
+
+<!-- ==================== 主要贡献 ==================== -->
+<section id="highlights">
+  <h2>Highlights</h2>
+  <ul class="highlights">
+    <li>Built a <b>neural-operator surrogate for a coupled poromechanics model</b> of gas-field subsidence, trained on
+      1,000 finite-element simulations; it replaces a ~90-minute simulation with a millisecond prediction and makes
+      Bayesian inversion against field leveling data practical.</li>
+    <li>Led <b>HeuriGuide</b> (first author, under review at ICLR 2027), which asks how much decision authority an
+      LLM agent should have inside test-time optimization, evaluated on nine combinatorial optimization problems.</li>
+    <li>Designed a <b>physics-informed Line-Set Transformer</b> that identifies atomic species in hypersonic
+      shock-tunnel spectra, combining a forward absorption model with learned line detection.</li>
+    <li>Diagnosed why <b>quadruped navigation policies fail to transfer to a taller robot</b>, traced it to how the
+      terrain map is referenced to the body, and recovered the policies without retraining.</li>
+    <li>Co-authored <b>NeighborDrive</b>, which received the <b>Best Paper Award (2nd Place)</b> at SocialSys 2026;
+      I developed its privacy-preserving vehicle detection on event images.</li>
+    <li>Team leader on an <b>earthworm-inspired burrowing robot</b> (granted Chinese invention patent; 1st Prize,
+      Shanghai “Creation Cup”), from mechanical design to soil penetration tests.</li>
+  </ul>
+</section>
+
+<!-- ==================== 研究兴趣 ==================== -->
+<section id="interests">
+  <h2>Research Interests</h2>
+  <figure class="diagram">
+<svg viewBox="0 44 800 272" role="img" aria-labelledby="dgt">
+  <title id="dgt">Physics-based models and machine learning at the center, connected to four application areas</title>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" class="ahead"/></marker>
+  </defs>
+  <!-- spokes -->
+  <path id="sp1" class="spoke" d="M293 150 C 250 120, 240 95, 212 92"/>
+  <path id="sp2" class="spoke" d="M507 150 C 550 120, 560 95, 588 92"/>
+  <path id="sp3" class="spoke" d="M293 210 C 250 240, 240 265, 212 268"/>
+  <path id="sp4" class="spoke" d="M507 210 C 550 240, 560 265, 588 268"/>
+  <circle r="3.5" class="dot p"><animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#sp1"/></animateMotion></circle>
+  <circle r="3.5" class="dot l" opacity="0"><set attributeName="opacity" to="1" begin="0.8s"/><animateMotion dur="3.2s" begin="0.8s" repeatCount="indefinite"><mpath href="#sp2"/></animateMotion></circle>
+  <circle r="3.5" class="dot p" opacity="0"><set attributeName="opacity" to="1" begin="1.6s"/><animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#sp3"/></animateMotion></circle>
+  <circle r="3.5" class="dot l" opacity="0"><set attributeName="opacity" to="1" begin="2.4s"/><animateMotion dur="3.2s" begin="2.4s" repeatCount="indefinite"><mpath href="#sp4"/></animateMotion></circle>
+
+  <!-- core loop -->
+  <path id="arcTop" class="arc" d="M352 136 Q 400 98 448 136" marker-end="url(#ah)"/>
+  <path id="arcBot" class="arc" d="M448 224 Q 400 262 352 224" marker-end="url(#ah)"/>
+  <circle r="4" class="dot p"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#arcTop"/></animateMotion></circle>
+  <circle r="4" class="dot l" opacity="0"><set attributeName="opacity" to="1" begin="1.2s"/><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#arcBot"/></animateMotion></circle>
+  <text x="400" y="100" class="arclbl">constrains</text>
+  <text x="400" y="272" class="arclbl">accelerates &amp; completes</text>
+
+  <circle cx="330" cy="180" r="54" class="node phys"><animate attributeName="r" values="54;57;54" dur="4s" repeatCount="indefinite"/></circle>
+  <circle cx="470" cy="180" r="54" class="node ml"><animate attributeName="r" values="54;57;54" dur="4s" begin="2s" repeatCount="indefinite"/></circle>
+  <text x="330" y="176" class="nodetxt">Physics-based</text><text x="330" y="194" class="nodetxt">models</text>
+  <text x="470" y="176" class="nodetxt">Machine</text><text x="470" y="194" class="nodetxt">learning</text>
+
+  <!-- application areas -->
+  <a href="#research" data-pf="sciml"><g class="box"><rect x="12" y="58" width="200" height="68" rx="8"/>
+    <text x="112" y="84" class="bt">Scientific ML</text>
+    <text x="112" y="104" class="bs">subsidence · batteries · spectra · wind</text></g></a>
+  <a href="#research" data-pf="robot"><g class="box"><rect x="588" y="58" width="200" height="68" rx="8"/>
+    <text x="688" y="84" class="bt">Robot Learning</text>
+    <text x="688" y="104" class="bs">sim-to-real navigation · hardware</text></g></a>
+  <a href="#research" data-pf="sense"><g class="box"><rect x="12" y="234" width="200" height="68" rx="8"/>
+    <text x="112" y="260" class="bt">Sensing &amp; Perception</text>
+    <text x="112" y="280" class="bs">video · point clouds · mobile sensing</text></g></a>
+  <a href="#research" data-pf="decide"><g class="box"><rect x="588" y="234" width="200" height="68" rx="8"/>
+    <text x="688" y="260" class="bt">Decision-Making</text>
+    <text x="688" y="280" class="bs">LLM agents · offline RL · optimization</text></g></a>
+</svg>
+<figcaption>Known physics constrains what is learned; learning makes the physics fast enough, complete enough and usable for decisions.</figcaption>
+</figure>
+  <div class="interests">
+    <div><b>Physics-Informed Scientific Machine Learning</b><span>Neural operators and surrogate models that make high-fidelity
+      simulation fast enough for inversion and uncertainty quantification, in subsurface mechanics, battery degradation,
+      spectroscopy and wind power.</span></div>
+    <div><b>Robot Learning &amp; Sim-to-Real Transfer</b><span>Navigation policies trained in simulation that hold up on real
+      robots, and understanding why transfer breaks down across robots and terrain.</span></div>
+    <div><b>Learning-Based Decision-Making &amp; Optimization</b><span>LLM agents for heuristic design, offline reinforcement
+      learning with careful off-policy evaluation, and search for combinatorial problems.</span></div>
+    <div><b>Sensing &amp; Perception for Infrastructure</b><span>Vision and mobile sensing that turn video, point clouds and
+      sensor data from cities and construction sites into engineering information.</span></div>
+  </div>
+</section>
+
+<!-- ==================== 项目 ====================
+     改法：每个 <article class="proj"> 是一个项目，复制整块即可新增。
+     data-g 决定它属于哪个分类标签：sciml / robot / decide / sense
+-->
+<section id="research">
+  <h2>Research</h2>
+  <div class="tabs" id="ptabs">
+    <button class="on" data-f="all">All</button>
+    <button data-f="sciml">Scientific ML</button>
+    <button data-f="robot">Robot Learning</button>
+    <button data-f="decide">Decision-Making</button>
+    <button data-f="sense">Sensing &amp; Perception</button>
+  </div>
+  <div class="projects">
+    <article class="proj" data-g="sciml">
+      <div class="meta">Stanford CEE · 2026 – present</div>
+      <h3>Finite Element Modeling and ML Acceleration for Reservoir Subsidence</h3>
+      <p>Built coupled pore-pressure and deformation models (MOOSE) of persistent subsidence above a gas field and a
+        hierarchical DeepONet surrogate over 1,000 simulations for Bayesian inversion and parameter identifiability;
+        now extending to a 3-D multi-well dual-porosity system.</p>
+      <div class="foot"><span class="chip">FEM</span><span class="chip">DeepONet</span><span class="chip">Bayesian inversion</span></div>
+    </article>
+    <article class="proj" data-g="sciml">
+      <div class="meta">Stanford ME · 2026 – present</div>
+      <h3>Physics-Informed Transformer for High-Temperature Gas Species Identification</h3>
+      <p>Built a forward absorption model to identify Fe, Cr and Si in shock-tunnel spectra and infer excitation
+        temperatures, then a transformer with spectral priors and differentiable line reconstruction for joint line
+        localization and species identification.</p>
+      <div class="foot"><span class="chip">Spectroscopy</span><span class="chip">Transformer</span></div>
+    </article>
+    <article class="proj" data-g="sciml">
+      <div class="meta">Stanford Energy Science &amp; Engineering · 2026 – present</div>
+      <h3>Electrochemical Modeling and Capacity Prognostics for LiFePO<sub>4</sub> Batteries</h3>
+      <p>Extended a core-shell single-particle model to constant-power cycling, identified its parameters from voltage
+        and differential-voltage data, and developed a low-rank multi-output Gaussian process for cross-cell capacity forecasting.</p>
+      <div class="foot"><span class="chip">Electrochemistry</span><span class="chip">Gaussian process</span><a class="lk" href="#pub-tii">Paper</a></div>
+    </article>
+    <article class="proj" data-g="sciml">
+      <div class="meta">National University of Singapore · 2025 – 2026</div>
+      <h3>Physics-Informed Day-Ahead Wind Power Forecasting</h3>
+      <p>Co-developed a model that forecasts residuals from turbine power curves and enforces rated-power, ramp-rate and
+        Betz-limit constraints, outperforming iTransformer and Crossformer.</p>
+      <div class="foot"><span class="chip">Time series</span><span class="chip">Physics constraints</span><a class="lk" href="#pub-wind">Paper</a></div>
+    </article>
+    <article class="proj" data-g="robot">
+      <div class="meta">Stanford Aeronautics &amp; Astronautics · 2026 – present</div>
+      <h3>Temporal Policy Learning for Sim-to-Real Quadruped Navigation</h3>
+      <p>Migrated navigation tasks to MuJoCo Warp with a hierarchical controller, compared feedforward, SSM and Transformer
+        policies, studied which interaction history a navigation policy should keep, and diagnosed a cross-robot transfer failure.</p>
+      <div class="foot"><span class="chip">RL</span><span class="chip">Sim-to-real</span><a class="lk" href="https://tiamat.berkeley.edu/" target="_blank">TIAMAT ↗</a><a class="lk" href="#pub-a2">Paper</a></div>
+    </article>
+    <article class="proj" data-g="robot">
+      <div class="meta">Tongji University · 2022 – 2025 · Team leader</div>
+      <h3>Earthworm-Inspired Deep Earth Exploration Robot</h3>
+      <p>Led a team that designed, built and tested a burrowing robot combining earthworm locomotion with EPB
+        shield-tunneling principles, with embedded pressure, temperature and humidity sensing.</p>
+      <div class="foot"><span class="chip">Hardware</span><span class="chip">Bio-inspired</span><a class="lk" href="https://patents.google.com/patent/CN116165090B" target="_blank">Patent ↗</a></div>
+    </article>
+    <article class="proj" data-g="robot sense">
+      <div class="meta">Stanford CEE · 2026 – present</div>
+      <h3>Object-Centric 4D Dynamic Scene Reconstruction</h3>
+      <p>Building synthetic occlusion benchmarks and reproducing recent 4D reconstruction methods to study how object
+        identity and motion can be kept consistent through occlusion and reappearance.</p>
+      <div class="foot"><span class="chip">3D vision</span><span class="chip">Occlusion</span></div>
+    </article>
+    <article class="proj" data-g="decide">
+      <div class="meta">Stanford EE · 2026 – present</div>
+      <h3>HeuriGuide: LLM-Based Automatic Heuristic Design</h3>
+      <p>Introduced an inner LLM agent into test-time optimization and compared three levels of agent authority, from
+        generating solutions directly to routing among curated strategies.</p>
+      <div class="foot"><span class="chip">LLM agents</span><span class="chip">Optimization</span><a class="lk" href="#pub-heuriguide">Paper</a><a class="lk" href="https://arxiv.org/abs/2506.07972" target="_blank">HeuriGym ↗</a></div>
+    </article>
+    <article class="proj" data-g="decide">
+      <div class="meta">MIT · 2026 – present</div>
+      <h3>Decision Rules and Offline RL for Adaptive Practice</h3>
+      <p>Audited mastery rules and offline RL checkpoint selection on large-scale learning logs, showing how sample
+        selection and checkpoint choice can create differences that disappear under matched comparison.</p>
+      <div class="foot"><span class="chip">Offline RL</span><span class="chip">Off-policy evaluation</span><a class="lk" href="#pub-lak">Paper 1</a><a class="lk" href="#pub-sac">Paper 2</a></div>
+    </article>
+    <article class="proj" data-g="decide">
+      <div class="meta">Stanford EE · 2026</div>
+      <h3>Memory-Constrained Computation Graph Scheduling</h3>
+      <p>Built a solver that jointly chooses execution order, operator fusion, tiling and tensor residency for
+        memory-constrained ML accelerators.</p>
+      <div class="foot"><span class="chip">ML systems</span><span class="chip">Search</span><a class="lk" href="https://github.com/yarongmu-google/MLSys" target="_blank">MLSys 2026 ↗</a></div>
+    </article>
+    <article class="proj" data-g="sense">
+      <div class="meta">Stanford CEE · 2025 – present</div>
+      <h3>NeighborDrive: Privacy-Preserving Neighborhood Sensing</h3>
+      <p>Developed vehicle detection on event images generated from RGB video, so privacy-sensitive appearance is removed
+        at the source, and characterized how event thresholds and vehicle speed affect detection.</p>
+      <div class="foot"><span class="chip">Event vision</span><span class="chip">YOLO</span><a class="lk" href="https://web.stanford.edu/group/noh-lab/neighbordrive/" target="_blank">Project ↗</a><a class="lk" href="#pub-nd">Paper</a></div>
+    </article>
+    <article class="proj" data-g="sense">
+      <div class="meta">Stanford CEE · 2026 – present</div>
+      <h3>Vision-Based Production Process Modeling for Construction</h3>
+      <p>Detecting and tracking workers and equipment in nine months of site video and training graph neural networks
+        to separate productive from idle periods.</p>
+      <div class="foot"><span class="chip">Tracking</span><span class="chip">GNN</span></div>
+    </article>
+    <article class="proj" data-g="sense decide">
+      <div class="meta">Stanford CEE · 2025 – 2026</div>
+      <h3>Multi-Agent Pavement Condition Assessment</h3>
+      <p>Developed lane-level point-cloud processing and a guideline-reasoning benchmark for a neuro-symbolic multi-agent
+        system that grades pavement defects.</p>
+      <div class="foot"><span class="chip">LLM agents</span><span class="chip">Point clouds</span><a class="lk" href="#pub-aei">Paper</a></div>
+    </article>
+    <article class="proj" data-g="sense sciml">
+      <div class="meta">Tongji &amp; UC Berkeley · 2024 – 2026</div>
+      <h3>Dynamic Training Strategies for EPB Shield Tunneling Prediction</h3>
+      <p>Compared ring-by-ring and sliding-window retraining of tunnel boring machine models as excavation advances,
+        with a scoring framework that weighs accuracy against computational cost.</p>
+      <div class="foot"><span class="chip">Geotechnics</span><span class="chip">Sequential learning</span><a class="lk" href="#pub-epb">Paper</a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ==================== 论文 ====================
+     改法：每个 <div class="pub"> 是一篇。hl = 一作（浅黄底高亮）。
+     data-status: review / prep / published
+     左侧配图放在 images/ 文件夹，文件名写在 <img src="images/xxx.jpg">；图缺失时自动显示会议名
+-->
+<section id="publications">
+  <h2>Publications</h2>
+  <div class="tabs" id="btabs">
+    <button class="on" data-f="all">All</button>
+    <button data-f="first">First author</button>
+    <button data-f="published">Published</button>
+    <button data-f="review">Under review</button>
+  </div>
+  <div class="pubs">
+    <div class="pub hl" id="pub-heuriguide" data-status="review">
+      <div class="thumb"><img src="images/heuriguide.jpg" alt=""><div class="ph">ICLR 2027</div></div>
+      <div>
+        <div class="title">HeuriGuide: Calibrating LLM Authority for Test-Time Heuristic Design</div>
+        <div class="authors"><b>Shang Gao</b>, Genghan Zhang, Mengjie Xie, Kunle Olukotun</div>
+        <div class="venue">International Conference on Learning Representations (ICLR 2027)</div>
+        <div class="foot"><span class="badge">ICLR 2027</span><span class="st">Under review</span></div>
+      </div>
+    </div>
+    <div class="pub hl" id="pub-lak" data-status="review">
+      <div class="thumb"><img src="images/lak.jpg" alt=""><div class="ph">LAK 2027</div></div>
+      <div>
+        <div class="title">When Should Practice Stop? Evaluating Mastery Rules in Censored Platform Logs</div>
+        <div class="authors"><b>Shang Gao</b>, Abel Sanchez</div>
+        <div class="venue">International Conference on Learning Analytics &amp; Knowledge (LAK 2027)</div>
+        <div class="foot"><span class="badge">LAK 2027</span><span class="st">Under review</span></div>
+      </div>
+    </div>
+    <div class="pub hl" id="pub-sac" data-status="review">
+      <div class="thumb"><img src="images/sac.png" alt=""><div class="ph">SAC 2027</div></div>
+      <div>
+        <div class="title">Checkpoint Selection and Reward Comparisons in Offline Adaptive Practice</div>
+        <div class="authors"><b>Shang Gao</b>, Abel Sanchez</div>
+        <div class="venue">ACM/SIGAPP Symposium on Applied Computing (SAC 2027), AI for Education Track</div>
+        <div class="foot"><span class="badge">SAC 2027</span><span class="st">Under review</span></div>
+      </div>
+    </div>
+    <div class="pub" id="pub-aei" data-status="review">
+      <div class="thumb"><img src="images/aei.png" alt=""><div class="ph">Adv. Eng. Informatics</div></div>
+      <div>
+        <div class="title">AutoRoadAssess: A Multi-Agent Framework with Neuro-Symbolic Guideline Reasoning for Autonomous Pavement Condition Assessment from Multimodal Data</div>
+        <div class="authors">Linjun Lu, Yuandong Pan, Jiechao Gao, <b>Shang Gao</b>, Varun Kumar Reja, Jie Wang, Michael D. Lepech, Ioannis Brilakis</div>
+        <div class="venue">Advanced Engineering Informatics</div>
+        <div class="foot"><span class="badge">AEI</span><span class="st">Under review</span></div>
+      </div>
+    </div>
+    <div class="pub hl" id="pub-tii" data-status="prep">
+      <div class="thumb"><img src="images/battery.jpg" alt=""><div class="ph">IEEE TII</div></div>
+      <div>
+        <div class="title">A Low-Rank Multi-Output Gaussian Process for Cross-Cell Capacity Forecasting from Sparse Reference Performance Tests</div>
+        <div class="authors"><b>Shang Gao</b>, Simone Fasolato, Simona Onori</div>
+        <div class="venue">IEEE Transactions on Industrial Informatics</div>
+        <div class="foot"><span class="badge">IEEE TII</span><span class="st">In preparation</span></div>
+      </div>
+    </div>
+    <div class="pub hl" id="pub-a2" data-status="prep">
+      <div class="thumb"><img src="images/a2nav.jpg" alt=""><div class="ph">CoRL 2026 Workshop</div></div>
+      <div>
+        <div class="title">Temporal A2 Navigation Under Execution Changes</div>
+        <div class="authors"><b>Shang Gao</b>, Yousef Liang, Marco Pavone</div>
+        <div class="venue">Sim-to-Real-to-Field: The Science of Transfer (Sim2Real2Field), CoRL 2026 Workshop</div>
+        <div class="foot"><span class="badge">CoRL 2026 Workshop</span><span class="st">In preparation</span><a class="lk" href="https://tiamat.berkeley.edu/" target="_blank">TIAMAT ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" data-status="published">
+      <div class="thumb"><img src="images/icom.jpg" alt=""><div class="ph">ICOM 2026</div></div>
+      <div>
+        <div class="title">Integrating Machine Learning and Domain Knowledge for Predicting Polyethersulfone Hollow Fiber Membrane Performance: A Comparative Study of CatBoost, XGBoost, and TabNet</div>
+        <div class="authors">Lina Chi, <b>Shang Gao</b>, Huiyuan Xue, Jie Wang</div>
+        <div class="venue">International Congress on Membranes and Membrane Processes (ICOM 2026)</div>
+        <div class="foot"><span class="badge">ICOM 2026</span><a class="lk scholar">Google Scholar ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" id="pub-wind" data-status="published">
+      <div class="thumb"><img src="images/wind.jpg" alt=""><div class="ph">APPEEC 2026</div></div>
+      <div>
+        <div class="title">Novel Physics-Informed Day-Ahead Wind Power Forecasting Model Design</div>
+        <div class="authors">Xiao Huang, Rossi Shao, Yue Xiang, <b>Shang Gao</b>, Dipti Srinivasan</div>
+        <div class="venue">IEEE PES Asia-Pacific Power and Energy Engineering Conference (APPEEC 2026)</div>
+        <div class="foot"><span class="badge">APPEEC 2026</span><a class="lk scholar">Google Scholar ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" id="pub-nd" data-status="published">
+      <div class="thumb"><img src="images/neighbordrive.jpg" alt=""><div class="ph">SocialSys 2026</div></div>
+      <div>
+        <div class="title">NeighborDrive: Privacy-Preserving Neighborhood Sensing Through Outreach Vehicles</div>
+        <div class="authors">Jatin Aggarwal, <b>Shang Gao</b>, Amelie Bonde, Zhili He, Julia Gersey, Tomas Samuel Fernandez, Rahul Rejeev, Pei Zhang, Hae Young Noh</div>
+        <div class="venue">4th International Workshop on Social Infrastructure Systems (SocialSys 2026), ACM Sustainability Week Companion ’26</div>
+        <div class="foot"><span class="badge">SocialSys 2026</span><span class="award">🏆 Best Paper Award (2nd Place)</span><a class="lk" href="https://web.stanford.edu/group/noh-lab/neighbordrive/" target="_blank">Project ↗</a><a class="lk scholar">Google Scholar ↗</a></div>
+      </div>
+    </div>
+    <div class="pub hl" id="pub-epb" data-status="published">
+      <div class="thumb"><img src="images/epb.png" alt=""><div class="ph">ICITG 2026</div></div>
+      <div>
+        <div class="title">Dynamic Training Strategies for Data-Driven Prediction of EPB Shield Tunneling Parameters: Balancing Accuracy and Computational Efficiency</div>
+        <div class="authors"><b>Shang Gao</b>, Mingliang Zhou, Dayu Apoji, Kenichi Soga</div>
+        <div class="venue">6th International Conference on Information Technology in Geo-Engineering (ICITG 2026)</div>
+        <div class="foot"><span class="badge">ICITG 2026</span><a class="lk scholar">Google Scholar ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" data-status="published">
+      <div class="thumb"><img src="images/girder.jpg" alt=""><div class="ph">Applied Sciences</div></div>
+      <div>
+        <div class="title">Mechanical Behaviour and Parametric Analysis of the Hybrid Girder Bridge Joint Between Steel–Concrete Composite Girder and Prestressed Concrete Girder</div>
+        <div class="authors">Yiteng Lin, Qingtian Su, Fawas O. Matanmi, Xingfei Yan, <b>Shang Gao</b></div>
+        <div class="venue">Applied Sciences, 16(13), 6322, 2026</div>
+        <div class="foot"><span class="badge">Applied Sciences</span><a class="lk" href="https://doi.org/10.3390/app16136322" target="_blank">Paper ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" data-status="published">
+      <div class="thumb"><img src="images/robot.jpg" alt=""><div class="ph">Patent</div></div>
+      <div>
+        <div class="title">Earthworm-Inspired Bionic Robot for Geological Condition Exploration</div>
+        <div class="authors">Yong Yuan, <b>Shang Gao</b>, Jiaolong Zhang, Xueming Yao, Xinhang Xiong</div>
+        <div class="venue">Chinese Invention Patent CN116165090B, granted 2025</div>
+        <div class="foot"><span class="badge">Patent</span><a class="lk" href="https://patents.google.com/patent/CN116165090B" target="_blank">Google Patents ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" data-status="published">
+      <div class="thumb"><img src="images/tongji.png" alt=""><div class="ph">J. Tongji Univ.</div></div>
+      <div>
+        <div class="title">Co-Experts-Based Large Language Model Question-Answering System for Building Construction</div>
+        <div class="authors">Bin Yang, Hongru Xiao, <b>Shang Gao</b>, Ke Lei, Wenshuo Chen, Qilin Zhang, Congjun Wang</div>
+        <div class="venue">Journal of Tongji University (Natural Science), 54(1), 2026</div>
+        <div class="foot"><span class="badge">J. Tongji Univ.</span><a class="lk" href="https://doi.org/10.11908/j.issn.0253-374x.24303" target="_blank">Paper ↗</a></div>
+      </div>
+    </div>
+    <div class="pub" data-status="published">
+      <div class="thumb"><img src="images/bigdata.png" alt=""><div class="ph">IEEE BigData 2024</div></div>
+      <div>
+        <div class="title">From Viewing to Purchasing: The Moderating Effects of Lucky Draw in Live-Streaming Commerce</div>
+        <div class="authors">Xingyu Chen, Muran Yu, <b>Shang Gao</b>, Ying Liu, Wei Shang</div>
+        <div class="venue">Proceedings of the IEEE International Conference on Big Data (BigData 2024)</div>
+        <div class="foot"><span class="badge">IEEE BigData 2024</span><a class="lk scholar">Google Scholar ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 教育 ==================== -->
+<section id="education">
+  <h2>Education</h2>
+  <div class="timeline">
+    <div class="tl">
+      <div class="row"><h3>Stanford University</h3><span class="when">Sep 2025 – Jun 2027 (expected)</span></div>
+      <p>M.S., Computation &amp; Mechanics, Civil &amp; Environmental Engineering · GPA 3.986 / 4.00</p>
+      <p>Research Assistant, Energy Control Lab and Sustainable Systems Lab</p>
+    </div>
+    <div class="tl">
+      <div class="row"><h3>University of California, Berkeley</h3><span class="when">Aug 2024 – May 2025</span></div>
+      <p>Visiting Student, Tongji–UC Berkeley 3+1 Program (3 selected from 400) · GPA 4.0 / 4.0</p>
+    </div>
+    <div class="tl">
+      <div class="row"><h3>Tongji University</h3><span class="when">Aug 2021 – Jun 2025</span></div>
+      <p>B.S., Civil Engineering, Minor in Finance · GPA 4.50 / 5.00</p>
+      <p>National Scholarship (top 2%, 2022–2023)</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contact">
+    <div>
+      <h3>Get in touch</h3>
+      <p>Email: <a href="mailto:shang698@stanford.edu">shang698@stanford.edu</a> — happy to talk about research or Ph.D. opportunities.</p>
+    </div>
+    <div class="btns">
+      <button class="btn copy" title="Copy email address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy email</span></button>
+      <a class="btn primary" href="cv.pdf" target="_blank">Download CV</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>© 2026 Shang Gao · Last updated October 2026</footer>
+<button id="top" aria-label="Back to top">↑</button>
+<div id="lb"><img alt=""></div>
+
+<script>
+  // Thumbnails: show the image if it exists, otherwise the venue label
+  document.querySelectorAll('.thumb').forEach(t => {
+    const img = t.querySelector('img'), ph = t.querySelector('.ph');
+    const ok = () => { ph.style.display = 'none'; img.style.display = ''; };
+    const bad = () => { img.style.display = 'none'; ph.style.display = ''; };
+    img.style.display = 'none';
+    if (img.complete) (img.naturalWidth ? ok() : bad()); else { img.onload = ok; img.onerror = bad; }
+  });
+  // Click a thumbnail to enlarge it
+  const lb = document.getElementById('lb');
+  document.querySelectorAll('.thumb img').forEach(i => i.addEventListener('click', () => { lb.querySelector('img').src = i.src; lb.classList.add('open'); }));
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+  // "Google Scholar" links: search by title
+  document.querySelectorAll('a.scholar').forEach(a => {
+    const t = a.closest('.pub').querySelector('.title').textContent.trim();
+    a.href = 'https://scholar.google.com/scholar?q=' + encodeURIComponent('"' + t + '"');
+    a.target = '_blank';
+  });
+  // Tabs
+  function tabs(id, items, match) {
+    const bar = document.getElementById(id);
+    const set = f => {
+      bar.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
+      document.querySelectorAll(items).forEach(el => { el.style.display = (f === 'all' || match(el, f)) ? '' : 'none'; });
+    };
+    bar.querySelectorAll('button').forEach(b => b.addEventListener('click', () => set(b.dataset.f)));
+    return set;
+  }
+  const setProj = tabs('ptabs', '.proj', (el, f) => el.dataset.g.split(' ').includes(f));
+  const setPub = tabs('btabs', '.pub', (el, f) =>
+    f === 'first' ? el.classList.contains('hl') : el.dataset.status === f);
+  // Diagram boxes filter the project list
+  document.querySelectorAll('figure.diagram a[data-pf]').forEach(a => a.addEventListener('click', () => setProj(a.dataset.pf)));
+  // In-page links to a paper: make sure it is visible, then flash it
+  document.querySelectorAll('a[href^="#pub-"]').forEach(a => a.addEventListener('click', () => {
+    setPub('all');
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) { el.animate([{ boxShadow: '0 0 0 2px var(--accent)' }, { boxShadow: '0 0 0 0 transparent' }], { duration: 1600 }); }
+  }));
+  // Copy email
+  document.querySelectorAll('button.copy').forEach(b => b.addEventListener('click', async () => {
+    const s = b.querySelector('span');
+    try { await navigator.clipboard.writeText('shang698@stanford.edu'); s.textContent = 'Copied ✓'; }
+    catch (e) { s.textContent = 'shang698@stanford.edu'; }
+    setTimeout(() => { s.textContent = 'Copy email'; }, 1800);
+  }));
+  // Dark mode toggle (remembered per browser)
+  const root = document.documentElement;
+  try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  document.getElementById('theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+  // Nav highlight for the current section + back-to-top button
+  const links = [...document.querySelectorAll('nav a.l[href^="#"]')];
+  const top = document.getElementById('top');
+  addEventListener('scroll', () => {
+    top.classList.toggle('show', scrollY > 600);
+    let cur = '';
+    document.querySelectorAll('main section[id]').forEach(s => { if (s.getBoundingClientRect().top < 120) cur = s.id; });
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+  top.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
