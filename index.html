@@ -246,7 +246,7 @@
 
 <div class="stats">
   <div class="stat"><b>13</b><span>papers</span></div>
-  <div class="stat"><b>6</b><span>first-authored</span></div>
+  <div class="stat"><b>5</b><span>first-authored</span></div>
   <div class="stat"><b>1</b><span>granted patent</span></div>
   <div class="stat"><b>Best Paper</b><span>Award (2nd), SocialSys ’26</span></div>
 </div>
@@ -351,8 +351,9 @@
       <div class="meta">Stanford CEE · 2026 – present</div>
       <h3>Finite Element Modeling and ML Acceleration for Reservoir Subsidence</h3>
       <p>Built coupled pore-pressure and deformation models (MOOSE) of persistent subsidence above a gas field and a
-        hierarchical DeepONet surrogate over 1,000 simulations for Bayesian inversion and parameter identifiability;
-        now extending to a 3-D multi-well dual-porosity system.</p>
+        hierarchical DeepONet surrogate over 1,000 simulations for Bayesian inversion against leveling observations;
+        now adding a viscoplastic (Modified Cam-Clay) sand–shale column model driven by curated pressure records
+        from five wells.</p>
       <div class="foot"><span class="chip">FEM</span><span class="chip">DeepONet</span><span class="chip">Bayesian inversion</span></div>
     </article>
     <article class="proj" data-g="sciml">
@@ -367,7 +368,9 @@
       <div class="meta">Stanford Energy Science &amp; Engineering · 2026 – present</div>
       <h3>Electrochemical Modeling and Capacity Prognostics for LiFePO<sub>4</sub> Batteries</h3>
       <p>Extended a core-shell single-particle model to constant-power cycling, identified its parameters from voltage
-        and differential-voltage data, and developed a low-rank multi-output Gaussian process for cross-cell capacity forecasting.</p>
+        and differential-voltage data, and developed a low-rank multi-output Gaussian process for cross-cell capacity
+        forecasting that predicts later capacity tests from a cell’s first three with about 3.4% error, versus about
+        12% from extrapolated electrochemical parameters.</p>
       <div class="foot"><span class="chip">Electrochemistry</span><span class="chip">Gaussian process</span><a class="lk" href="#pub-tii">Paper</a></div>
     </article>
     <article class="proj" data-g="sciml">
@@ -377,12 +380,22 @@
         Betz-limit constraints, outperforming iTransformer and Crossformer.</p>
       <div class="foot"><span class="chip">Time series</span><span class="chip">Physics constraints</span><a class="lk" href="#pub-wind">Paper</a></div>
     </article>
+    <article class="proj" data-g="sciml">
+      <div class="meta">Tongji University · 2026 – present</div>
+      <h3>Multi-View Material Representation Learning for Constitutive Modeling</h3>
+      <p>Developed a model that infers a material code from a few cyclic tests and predicts stress–strain response
+        under unseen loading histories; pretrained on synthetic Voce–Chaboche data and adapted to 31 experimental
+        batches of nine material types, it beat separately calibrated models in 26 of them.</p>
+      <div class="foot"><span class="chip">Constitutive modeling</span><span class="chip">Transfer learning</span><a class="lk" href="#pub-mv">Paper</a></div>
+    </article>
     <article class="proj" data-g="robot">
       <div class="meta">Stanford Aeronautics &amp; Astronautics · 2026 – present</div>
       <h3>Temporal Policy Learning for Sim-to-Real Quadruped Navigation</h3>
       <p>Migrated navigation tasks to MuJoCo Warp with a hierarchical controller, compared feedforward, SSM and Transformer
-        policies, studied which interaction history a navigation policy should keep, and diagnosed a cross-robot transfer failure.</p>
-      <div class="foot"><span class="chip">RL</span><span class="chip">Sim-to-real</span><a class="lk" href="https://tiamat.berkeley.edu/" target="_blank">TIAMAT ↗</a><a class="lk" href="#pub-a2">Paper</a></div>
+        policies, studied which interaction history a navigation policy should keep, and diagnosed a cross-robot transfer
+        failure; also trained policies inside a learned GRU motion model that reach 84.4% success on unseen obstacle
+        layouts in full physics simulation.</p>
+      <div class="foot"><span class="chip">RL</span><span class="chip">Sim-to-real</span><a class="lk" href="https://tiamat.berkeley.edu/" target="_blank">TIAMAT ↗</a></div>
     </article>
     <article class="proj" data-g="robot">
       <div class="meta">Tongji University · 2022 – 2025 · Team leader</div>
@@ -394,8 +407,9 @@
     <article class="proj" data-g="robot sense">
       <div class="meta">Stanford CEE · 2026 – present</div>
       <h3>Object-Centric 4D Dynamic Scene Reconstruction</h3>
-      <p>Building synthetic occlusion benchmarks and reproducing recent 4D reconstruction methods to study how object
-        identity and motion can be kept consistent through occlusion and reappearance.</p>
+      <p>Reproducing recent 4D reconstruction methods and building controlled synthetic scenes to study how object
+        identity can be kept through full occlusion and reappearance, with paired scenes that isolate the effect of
+        shadows, toward an object-memory approach.</p>
       <div class="foot"><span class="chip">3D vision</span><span class="chip">Occlusion</span></div>
     </article>
     <article class="proj" data-g="decide">
@@ -418,6 +432,14 @@
       <p>Built a solver that jointly chooses execution order, operator fusion, tiling and tensor residency for
         memory-constrained ML accelerators.</p>
       <div class="foot"><span class="chip">ML systems</span><span class="chip">Search</span><a class="lk" href="https://github.com/yarongmu-google/MLSys" target="_blank">MLSys 2026 ↗</a></div>
+    </article>
+    <article class="proj" data-g="decide">
+      <div class="meta">Tongji University · 2025 – present</div>
+      <h3>Multi-Agent Reinforcement Learning for Code-Compliant Steel Frame Design</h3>
+      <p>Collaborating on steel frame design in which each agent selects member sections for one substructure and a
+        finite element model checks the whole frame against the design code; trained agents reach compliant designs
+        in 64 iterations, at least 15 times fewer than genetic algorithm and particle swarm baselines.</p>
+      <div class="foot"><span class="chip">Multi-agent RL</span><span class="chip">Structural design</span></div>
     </article>
     <article class="proj" data-g="sense">
       <div class="meta">Stanford CEE · 2025 – present</div>
@@ -482,20 +504,20 @@
         <div class="foot"><span class="badge">LAK 2027</span><span class="st">Under review</span></div>
       </div>
     </div>
-    <div class="pub hl" id="pub-sac" data-status="review">
-      <div class="thumb"><img src="images/sac.png" alt=""><div class="ph">SAC 2027</div></div>
-      <div>
-        <div class="title">Checkpoint Selection and Reward Comparisons in Offline Adaptive Practice</div>
-        <div class="authors"><b>Shang Gao</b>, Abel Sanchez</div>
-        <div class="venue">ACM/SIGAPP Symposium on Applied Computing (SAC 2027), AI for Education Track</div>
-        <div class="foot"><span class="badge">SAC 2027</span><span class="st">Under review</span></div>
-      </div>
-    </div>
     <div class="pub" id="pub-aei" data-status="review">
       <div class="thumb"><img src="images/aei.png" alt=""><div class="ph">Adv. Eng. Informatics</div></div>
       <div>
         <div class="title">AutoRoadAssess: A Multi-Agent Framework with Neuro-Symbolic Guideline Reasoning for Autonomous Pavement Condition Assessment from Multimodal Data</div>
         <div class="authors">Linjun Lu, Yuandong Pan, Jiechao Gao, <b>Shang Gao</b>, Varun Kumar Reja, Jie Wang, Michael D. Lepech, Ioannis Brilakis</div>
+        <div class="venue">Advanced Engineering Informatics</div>
+        <div class="foot"><span class="badge">AEI</span><span class="st">Under review</span></div>
+      </div>
+    </div>
+    <div class="pub" id="pub-mv" data-status="review">
+      <div class="thumb"><img src="images/multiview.jpg" alt=""><div class="ph">Adv. Eng. Informatics</div></div>
+      <div>
+        <div class="title">Multi-View Material Representation-Based Transfer Learning for Uniaxial Constitutive Modeling from Limited Cyclic Observations</div>
+        <div class="authors">Jiaqi Shi, Wei Wang, Yuqing Gao, Meiyu Du, Jiajun Du, <b>Shang Gao</b></div>
         <div class="venue">Advanced Engineering Informatics</div>
         <div class="foot"><span class="badge">AEI</span><span class="st">Under review</span></div>
       </div>
@@ -509,13 +531,13 @@
         <div class="foot"><span class="badge">IEEE TII</span><span class="st">In preparation</span></div>
       </div>
     </div>
-    <div class="pub hl" id="pub-a2" data-status="prep">
-      <div class="thumb"><img src="images/a2nav.jpg" alt=""><div class="ph">CoRL 2026 Workshop</div></div>
+    <div class="pub hl" id="pub-sac" data-status="published">
+      <div class="thumb"><img src="images/sac.png" alt=""><div class="ph">SAC 2027</div></div>
       <div>
-        <div class="title">Temporal A2 Navigation Under Execution Changes</div>
-        <div class="authors"><b>Shang Gao</b>, Yousef Liang, Marco Pavone</div>
-        <div class="venue">Sim-to-Real-to-Field: The Science of Transfer (Sim2Real2Field), CoRL 2026 Workshop</div>
-        <div class="foot"><span class="badge">CoRL 2026 Workshop</span><span class="st">In preparation</span><a class="lk" href="https://tiamat.berkeley.edu/" target="_blank">TIAMAT ↗</a></div>
+        <div class="title">Checkpoint Selection and Reward Comparisons in Offline Adaptive Practice</div>
+        <div class="authors"><b>Shang Gao</b>, Abel Sanchez</div>
+        <div class="venue">ACM/SIGAPP Symposium on Applied Computing (SAC 2027), AI for Education Track</div>
+        <div class="foot"><span class="badge">SAC 2027</span></div>
       </div>
     </div>
     <div class="pub" data-status="published">
@@ -629,7 +651,7 @@
 </section>
 
 </main>
-<footer>© 2026 Shang Gao · Last updated October 2026</footer>
+<footer>© 2026 Shang Gao · Last updated November 2026</footer>
 <button id="top" aria-label="Back to top">↑</button>
 <div id="lb"><img alt=""></div>
 
